@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Student
+    body 
+        include ../include/header.pug
+        
+        h2 Update Student
+        form(action=`/students/${student.id}?_method=PUT` method='POST')
+            div 
+                if(locals.handle.firstName != '') 
+                    label(for='firstname') #{locals.handle.firstName}
+                label(for="firstname") Input the first name 
+                input(type="text" name='firstName' id='firstname' value=student.firstName)
+            div 
+                if(locals.handle.lastName != '') 
+                    label(for='lastname') #{locals.handle.lastName }   
+                label(for="lastname") Input the famlly name 
+                input(type="text" name='lastName' id='lastname' value=student.lastName)
+            div 
+                if(locals.handle.email != '') 
+                    label(for='email') #{locals.handle.email}
+                label(for="email") Input the email 
+                input(type="email" name='email' id='email' value=student.email)
+            div 
+                label(for="phone1") Input the phone1 
+                input(type="text" name='phone' id='phone1' value=student.phone[0])
+            div 
+                label(for="phone2") Input the phone2
+                input(type="text" name='phone' id='phone2' value=student.phone[1])
+            div 
+                label(for="age") Input the age
+                input(type="number" name='age' id='age' value=student.age)
+            div 
+                input(type="submit" value="Update")
+            a(href="/students") last

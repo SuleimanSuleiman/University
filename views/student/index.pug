@@ -1,0 +1,36 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Index
+    body 
+        include ../include/header.pug
+        h3 Search 
+        form(method='GET' style='display: flex;width: 70%;padding: 14px;justify-content: space-between;align-items: flex-end;') 
+            div 
+                label(for="firstname") Input the first name 
+                input(type="text" name='firstName' id='firstname' value=search.firstName)
+            div  
+                label(for="lastname") Input the famlly name 
+                input(type="text" name='lastName' id='lastname' value=search.lastName)
+            div  
+                label(for="email") Input the Email 
+                input(type="email" name='email' id='email' value=search.email)
+            div 
+                input(type="submit" value='Search')
+        for student in students 
+            div(style='display: flex;justify-content: space-between;;background-color:grey;color: #fff;padding: 12px;margin-bottom:12px;width: 70%') 
+                div 
+                    h3 The Name : #{student.firstName +" "+ student.lastName}
+                    h3 University : 
+                        a(href=`/university/${student.universityId.slug}`) #{student.universityId.name}
+                    h3 Email : 
+                        a(href=`mailto:${student.email}`) #{student.email}
+                div(style='display: flex;flex-direction: column;justify-content: inherit;')
+                    form(action=`/students/delete/${student.id}?_method=DELETE` method='post') 
+                        button(type='submit') Delete
+                    a(href=`/students/edit/${student.id}`) Update 
+                    a(href=`/students/${student.id}`) Show
+                    a(href="/") last

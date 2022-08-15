@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Create University
+    body 
+        include ../include/header.pug
+        h3 Create University 
+        form(action="/university",method="POST")
+            div 
+                label(for="name") Pleace input University Name 
+                input(type="text", name="name" id='name' value=university.name)
+            div 
+                label(for="location") Pleace input University Location 
+                input(type="text", name="location" id='location' value=university.location)
+            div 
+                input(type="submit" value="CREATE")

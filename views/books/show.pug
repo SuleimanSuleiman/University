@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title show book
+    body 
+        include ../include/header.pug
+        div 
+            h4 Title : #{books.title}
+        div 
+            h4 price : #{books.price.toString()}
+        div 
+            h4 PublishDate : #{books.createdAt.toISOString().split('T')[0]}
+        div 
+            h4 Number of Section: #{books.lengthOfSection}
+            h4 Sections
+                for s in books.section
+                    h5 section: #{s}
+        div 
+            h4 Student:
+            h4 ===============================================
+                div 
+                    h4 First name : #{books.studentId.firstName}
+                div 
+                    h4 Familly name : #{books.studentId.lastName}
+                div 
+                    h4 The Email : #{books.studentId.email}
+                div
+                    h4 PublishDate : #{books.studentId.createdAt.toISOString().split('T')[0]}
+                for phone in books.studentId.phone
+                    h5 phone: #{phone}
+                div 
+                    h4 Age : #{books.studentId.age}
+                div 
+                    form(action=`/students/delete/${books.studentId.id}?_method=DELETE` method='post') 
+                        button(type='submit') Delete
+                        a(href=`/students/edit/${books.studentId.id}`) Update 
+                div 
+                    a(href=`/students/${books.studentId._id}`) Show
+                h4 ================================================
+        form(action=`/books/delete/${books.slug}?_method=DELETE` method='post') 
+            button(type='submit') Delete
+            a(href=`/books/edit/${books.slug}`) Update 
+            a(href="/books") last

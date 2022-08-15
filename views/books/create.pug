@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title create Book
+    body 
+        include ../include/header.pug
+
+        h3 Create Book 
+        form(action="/books" method='POST' id='form') 
+            div 
+                label(for="title") Title 
+                input(type="text" name='title' id='title' value=book.title)
+            div 
+                label(for="price") price
+                input(type="text" name='price' id='price' value=book.price)
+            div 
+                label(for="") student : 
+                select(name="studentId" )
+                    each student in students
+                        if(student.id === book.studentId) 
+                            option(value=student.id selected label=`${student.firstName} ${student.lastName}`)
+                        else 
+                            option(value=student.id label=`${student.firstName} ${student.lastName}`)
+            div 
+                label(for="lengthOfSection") number of section
+                input(type="number" name='lengthOfSection' id='lengthOfSection' vlaue=book.lengthOfSection)
+            div(id='section')
+            input(type="submit" value="CREATE")
+        script(src="/js/main.js")

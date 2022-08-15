@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Show #{university.name}
+    body 
+        h3 the Name : #{university.name}
+        h3 Loation : #{university.location}
+        h3 Students:
+        each student in university.students
+            h4 ===============================================
+                div 
+                    h4 First name : #{student.firstName}
+                div 
+                    h4 Familly name : #{student.lastName}
+                div
+                    h3 Email : 
+                        a(href=`mailto:${student.email}`) #{student.email}
+                div
+                    h4 PublishDate : #{student.createdAt.toISOString().split('T')[0]}
+                for phone in student.phone
+                    h5 phone: #{phone}
+                div 
+                    h4 Age : #{student.age}
+                div 
+                    form(action=`/students/delete/${student._id}?_method=DELETE` method='post') 
+                        button(type='submit') Delete
+                        a(href=`/students/edit/${student._id}`) Update 
+                div 
+                    a(href=`/students/${student._id}`) Show
+                        
+                
+            h4 ====================================================
+        form(action=`/university/delete/${university.slug}?_method=DELETE` method='post') 
+            button(type='submit') Delete
+            a(href=`/university/edit/${university.slug}`) Update 
+            a(href="/university") last

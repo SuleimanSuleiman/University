@@ -1,0 +1,19 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Update University #{university.name}
+    body 
+        include ../include/header.pug
+
+        h3  Update University #{university.name}
+        form(action=`/university/${university.slug}?_method=PUT` method='POST' id='form') 
+            div 
+                label(for="name") Name 
+                input(type="text" name='name' id='name' value=university.name)
+            div
+                label(for="location") Location
+                input(type="text" name='location' id='location' value=university.location)
+            input(type="submit" value="Update")

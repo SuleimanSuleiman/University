@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title show student
+    body 
+        include ../include/header.pug
+        div 
+            h4 First name : #{student.firstName}
+        div 
+            h4 Familly name : #{student.lastName}
+        div
+            h3 Email : 
+                    a(href=`mailto:${student.email}`) #{student.email}
+        div
+            h4 University : 
+                a(href=`/university/${student.universityId.slug}`) #{student.universityId.name}
+        div
+            h4 PublishDate : #{student.createdAt.toISOString().split('T')[0]}
+        for phone in student.phone
+            h5 phone: #{phone}
+        div 
+            h4 Age : #{student.age}
+        div 
+            h4 Books :
+            for book in student.books
+                h4 ==================================
+                h4 title: #{book.title}
+                h4 price: #{book.price}
+                h4 Sections: (number of Section is #{book.lengthOfSection})
+                h4 Sections:
+                each sec in book.section 
+                    h3 #{sec}
+                form(action=`/books/delete/${book.slug}?_method=DELETE` method='post') 
+                    button(type='submit') Delete
+                    a(href=`/books/edit/${book.slug}`) Update 
+                div 
+                    a(href=`/books/${book.slug}`) Show
+                h4  ====================================
+        form(action=`/students/delete/${student.id}?_method=DELETE` method='post') 
+            button(type='submit') Delete
+            a(href=`/students/edit/${student.id}`) Update 
+            a(href="/students") last

@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Index
+    body 
+        include ../include/header.pug
+        h3 Search 
+        form(method='GET' style='display: flex;width: 70%;padding: 14px;justify-content: space-between;align-items: flex-end;') 
+            div 
+                label(for="name") Input the name 
+                input(type="text" name='name' id='name' value=search.name)
+            div  
+                label(for="location") Input the location
+                input(type="text" name='location' id='location' value=search.location)
+            div 
+                input(type="submit" value='Search')
+        for university in universitys 
+            div(style='display: flex;justify-content: space-between;;background-color:grey;color: #fff;padding: 12px;margin-bottom:12px;width: 70%') 
+                div 
+                    h3 The Name : #{university.name}
+                    h3 Loation : #{university.location}
+                div(style='display: flex;flex-direction: column;justify-content: inherit;')
+                    form(action=`/university/delete/${university.slug}?_method=DELETE` method='post') 
+                        button(type='submit') Delete
+                    a(href=`/university/edit/${university.slug}`) Update 
+                    a(href=`/university/${university.slug}`) Show
